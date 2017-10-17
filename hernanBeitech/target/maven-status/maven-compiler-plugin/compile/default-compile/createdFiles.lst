@@ -1,0 +1,15 @@
+com\hernan\restapp\service\CRUDService.class
+com\hernan\restapp\service\impl\CustomerServiceImpl.class
+com\hernan\restapp\repository\OrderRepository.class
+com\hernan\restapp\controller\CustomerController.class
+com\hernan\restapp\repository\CustomerRepository.class
+com\hernan\restapp\service\OrderService.class
+com\hernan\restapp\controller\OrderController.class
+com\hernan\restapp\service\impl\OrderServiceImpl.class
+com\hernan\restapp\model\Order.class
+com\hernan\restapp\repository\ProductRepository.class
+com\hernan\restapp\controller\ViewController.class
+com\hernan\restapp\model\Customer.class
+com\hernan\restapp\Application.class
+com\hernan\restapp\service\CustomerService.class
+com\hernan\restapp\model\Product.class
