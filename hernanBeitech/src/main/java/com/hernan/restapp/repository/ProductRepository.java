@@ -5,6 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import com.hernan.restapp.model.Product;
 
+/**
+ * The Interface ProductRepository.
+ *
+ * @author Hernan
+ */
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 

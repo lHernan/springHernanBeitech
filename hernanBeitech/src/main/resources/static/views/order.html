@@ -1,0 +1,58 @@
+<h3 style="color: blue">Create order for customer:
+	{{customer.customerName}}</h3>
+
+<div class="form-group">
+	<label>Select products:</label>
+
+	<form name="orderForm" ng-submit="createOrder()">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Select Product</th>
+						<th>Product ID</th>
+						<th>Product Name</th>
+						<th>Description</th>
+						<th>Price</th>
+						<th>Quantity</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="product in customer.products">
+						<td><input type="checkbox"
+							ng-model="selectedProducts[product.productId].selected"
+							name="selectedProducts" /></td>
+						<td>{{product.productId}}</td>
+						<td>{{product.productName}}</td>
+						<td>{{product.productDescription}}</td>
+						<td>{{product.productPrice}}</td>
+						<td><select class="selectpicker"
+							ng-model="selectedProducts[product.productId].quantity">
+								<option value="" disabled selected>Select</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+						</select></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				Delivery Address: <input type="text" required
+					ng-model="order.deliveryAddress" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<button id="btn-id" type="submit" class="btn btn-primary">Create
+					order</button>
+			</div>
+		</div>
+	</form>
+
+</div>
+
+

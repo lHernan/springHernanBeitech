@@ -19,15 +19,27 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hernan.restapp.model.Order;
 import com.hernan.restapp.service.OrderService;
 
+/**
+ * The Class OrderController.
+ */
 @RestController
 @RequestMapping("/rest/order")
 public class OrderController {
-	
+
+	/** The Constant logger. */
 	private final static Logger logger = Logger.getLogger(OrderController.class);
 
+	/** The order service. */
 	@Autowired
 	private OrderService orderService;
 
+	/**
+	 * method to add order.
+	 *
+	 * @param order
+	 *            the order
+	 * @return the created order
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Order> addOrder(@RequestBody Order order) {
 		orderService.save(order);
@@ -35,9 +47,15 @@ public class OrderController {
 		return new ResponseEntity<Order>(order, HttpStatus.CREATED);
 	}
 
-
+	/**
+	 * method do get order by id.
+	 *
+	 * @param id
+	 *            the id
+	 * @return order found by id
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Order> getOrder(@PathVariable("id") Integer id) {
+	public ResponseEntity<Order> getOrder(@PathVariable("id") Long id) {
 		Order order = orderService.getById(id);
 		if (order == null) {
 			logger.debug("Order with id " + id + " does not exists");
@@ -47,18 +65,28 @@ public class OrderController {
 		return new ResponseEntity<Order>(order, HttpStatus.OK);
 	}
 
+	/**
+	 * method to get the orders of a customer by data range.
+	 *
+	 * @param customerId
+	 *            the customer id
+	 * @param initialDate
+	 *            the initial date
+	 * @param finalDate
+	 *            the final date
+	 * @return the all orders by customer
+	 */
 	@RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET)
-	public ResponseEntity<List<Order>> getAllOrdersByCustomer(
-			@PathVariable("customerId") Long customerId,
+	public ResponseEntity<List<Order>> getAllOrdersByCustomer(@PathVariable("customerId") Long customerId,
 			@RequestParam("initialDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date initialDate,
 			@RequestParam("finalDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date finalDate) {
-		
+
 		List<Order> orders = orderService.getAllOrdersByCustomerId(customerId, initialDate, finalDate);
 		if (orders.isEmpty()) {
 			logger.debug("Orders does not exists");
 			return new ResponseEntity<List<Order>>(HttpStatus.NO_CONTENT);
 		}
-		
+
 		logger.debug("Found " + orders.size() + " orders");
 		logger.debug(Arrays.toString(orders.toArray()));
 		return new ResponseEntity<List<Order>>(orders, HttpStatus.OK);
